@@ -56,7 +56,6 @@ def buttons(message):
 		d = random.choice(files)
 		cora = open(f'static\images\{d}','rb')
 		bot.send_message(message.chat.id, 'Посмотри на меня! \nЛови!', parse_mode='html' )
-		time.sleep(1)
 
 		bot.send_photo(message.chat.id, cora, "Ну как?", reply_markup=inline_markup)
 
@@ -98,6 +97,8 @@ def buttons(message):
 
 			mm, ss = divmod(delta.seconds, 60) # divmod is like mm = delta.seconds // 60 and ss = delta.seconds % 60
 			hh, mm = divmod(mm, 60)
+			time_minute = f'{time.minute}'
+			ring_minute = f'{ring.minute}'
 
 			#scenarios
 			# bot.send_message(message.chat.id, f'Осталось {hours} часов, {minute} минут и {second} секунд. \n Звонок в <b>{ring.hour}:{ring.minute}</b>', parse_mode='html')
@@ -119,9 +120,11 @@ def buttons(message):
 				answer =  f'Сейчас!!!'
 				bot.send_sticker(message.chat.id, happy_sticker)
 			if ring.minute == 0:
-				answer += f'\nЗвонок в <b>{ring.hour}:{ring.minute}0</b> \nСейчас {time.hour}:{time.minute}'
-			else:
-				answer += f'\nЗвонок в <b>{ring.hour}:{ring.minute}</b> \nСейчас {time.hour}:{time.minute}'	
+				ring_minute = '0' + ring_minute
+			if time.minute == 0 or time.minute == 1 or time.minute == 2 or time.minute == 3 or time.minute == 4 or time.minute == 5 or time.minute == 6 or time.minute == 7 or time.minute == 8 or time.minute == 9:
+				time_minute = '0' + time_minute
+
+			answer += f'\nЗвонок в <b>{ring.hour}:{ring_minute}</b> \nСейчас {time.hour}:{time_minute}'
 			bot.send_message(message.chat.id, answer, parse_mode='html')
 		except Exception as e:
 		 	bot.send_message(message.chat.id, f'Уроки закончились!', parse_mode='html')
