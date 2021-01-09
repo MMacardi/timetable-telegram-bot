@@ -43,7 +43,7 @@ def send_docs(message):
 @bot.message_handler(content_types=['text'])
 def buttons(message):
 
-	if message.text == "Отправь фото":
+	'''if message.text == "Отправь фото":
 		inline_markup = types.InlineKeyboardMarkup(row_width = 3)
 		button_1 = types.InlineKeyboardButton("👍", callback_data = "good")
 		button_2 = types.InlineKeyboardButton("👌", callback_data = "ok")
@@ -57,10 +57,10 @@ def buttons(message):
 		cora = open(f'static\images\{d}','rb')
 		bot.send_message(message.chat.id, 'Посмотри на меня! \nЛови!', parse_mode='html' )
 
-		bot.send_photo(message.chat.id, cora, "Ну как?", reply_markup=inline_markup)
+		bot.send_photo(message.chat.id, cora, "Ну как?", reply_markup=inline_markup)'''
 
 		
-	elif message.text == "Сколько времени до звонка?":
+	if message.text == "Сколько времени до звонка?":
 		time = datetime.datetime.now()
 		# in what time rings happen
 		rings = [
@@ -88,7 +88,7 @@ def buttons(message):
 			return min(item for item in items if item > pivot)
 		
 		try:
-			happy_sticker = open('static\stickers\happy.tgs', 'rb')
+			#happy_sticker = open('static\stickers\happy.tgs', 'rb')
 			ring = nearest(rings, now)
 			if ring > now:
 				delta = ring - now
@@ -157,7 +157,7 @@ def callback_inline(call):
 	# images app
 	if call.message:
 		try:
-			happy_sticker = open('static\stickers\happy.tgs', 'rb')
+			#happy_sticker = open('static\stickers\happy.tgs', 'rb')
 			if call.data == "good":
 				bot.send_sticker(call.message.chat.id, happy_sticker)
 				bot.send_message(call.message.chat.id, "Спасибочки! Буду продолжать делать такие фото! Мой инстаграм: cora_corgi_dog")
