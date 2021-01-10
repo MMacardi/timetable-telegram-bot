@@ -88,7 +88,7 @@ def buttons(message):
 			return min(item for item in items if item > pivot)
 		
 		try:
-			happy_sticker = open('static/stickers/happy.tgs', 'rb')
+			happy_sticker = open('./static/stickers/happy.tgs', 'rb')
 			ring = nearest(rings, now)
 			if ring > now:
 				delta = ring - now
@@ -157,7 +157,7 @@ def callback_inline(call):
 	# images app
 	if call.message:
 		try:
-			happy_sticker = open('static\stickers\happy.tgs', 'rb')
+			happy_sticker = open('./static/stickers/happy.tgs', 'rb')
 			if call.data == "good":
 				bot.send_sticker(call.message.chat.id, happy_sticker)
 				bot.send_message(call.message.chat.id, "Спасибочки! Буду продолжать делать такие фото! Мой инстаграм: cora_corgi_dog")
