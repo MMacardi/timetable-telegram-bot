@@ -92,7 +92,7 @@ def buttons(message):
 
 		current_hour = time.hour
 		current_minute = time.minute
-		now = datetime.datetime(year=time.year, month=time.month, day = time.day, hour=time.hour - 3,minute=time.minute, second=time.second)
+		now = datetime.datetime(year=time.year, month=time.month, day = time.day, hour=time.hour + 3,minute=time.minute, second=time.second)
 		# nearest ring to current time
 		def nearest(items, pivot):
 			return min(item for item in items if item > pivot)
@@ -134,7 +134,7 @@ def buttons(message):
 			if time.minute == 0 or time.minute == 1 or time.minute == 2 or time.minute == 3 or time.minute == 4 or time.minute == 5 or time.minute == 6 or time.minute == 7 or time.minute == 8 or time.minute == 9:
 				time_minute = '0' + time_minute
 
-			answer += f'\nЗвонок в <b>{ring.hour}:{ring_minute}</b> \nСейчас {time.hour - 3}:{time_minute}'
+			answer += f'\nЗвонок в <b>{ring.hour}:{ring_minute}</b> \nСейчас {time.hour + 3}:{time_minute}'
 			bot.send_message(message.chat.id, answer, parse_mode='html')
 		except Exception as e:
 		 	bot.send_message(message.chat.id, f'Уроки закончились!', parse_mode='html')
