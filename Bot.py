@@ -15,10 +15,10 @@ owm = pyowm.OWM(config.OPEN_WEATHER_MAP_TOKEN, language = "ru")
 def send_welcome(message):
 	markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 
-	# button_1 = types.KeyboardButton('Отправь фото')
-	button_1 = types.KeyboardButton('Сколько времени до звонка?')
+	button_1 = types.KeyboardButton('Отправь фото')
+	button_2 = types.KeyboardButton('Сколько времени до звонка?')
 
-	markup.add(button_1)
+	markup.add(button_1, button_2)
 
 	bot.reply_to(message, 
 	f'''Привет <b>{message.from_user.first_name}</b>! \nЯ <b>{bot.get_me().first_name}</b>, лучший коржик в мире!
@@ -43,7 +43,7 @@ def send_docs(message):
 @bot.message_handler(content_types=['text'])
 def buttons(message):
 
-	'''if message.text == "Отправь фото":
+	if message.text == "Отправь фото":
 		inline_markup = types.InlineKeyboardMarkup(row_width = 3)
 		button_1 = types.InlineKeyboardButton("👍", callback_data = "good")
 		button_2 = types.InlineKeyboardButton("👌", callback_data = "ok")
@@ -57,10 +57,10 @@ def buttons(message):
 		cora = open(f'static/images/{d}','rb')
 		bot.send_message(message.chat.id, 'Посмотри на меня! \nЛови!', parse_mode='html' )
 
-		bot.send_photo(message.chat.id, cora, "Ну как?", reply_markup=inline_markup)'''
+		bot.send_photo(message.chat.id, cora, "Ну как?", reply_markup=inline_markup)
 
 		
-	if message.text == "Сколько времени до звонка?":
+	elif message.text == "Сколько времени до звонка?":
 		time = datetime.datetime.now()
 		# in what time rings happen
 		rings = [
@@ -118,7 +118,7 @@ def buttons(message):
 				answer =  f'Осталось {mm} минут'
 			elif hh == 0 and mm == 0 and ss == 0:
 				answer =  f'Сейчас!!!'
-				#bot.send_sticker(message.chat.id, happy_sticker)
+				bot.send_sticker(message.chat.id, happy_sticker)
 			if ring.minute == 0:
 				ring_minute = '0' + ring_minute
 			if time.minute == 0 or time.minute == 1 or time.minute == 2 or time.minute == 3 or time.minute == 4 or time.minute == 5 or time.minute == 6 or time.minute == 7 or time.minute == 8 or time.minute == 9:
@@ -157,9 +157,9 @@ def callback_inline(call):
 	# images app
 	if call.message:
 		try:
-			#happy_sticker = open('static\stickers\happy.tgs', 'rb')
+			happy_sticker = open('static\stickers\happy.tgs', 'rb')
 			if call.data == "good":
-				#bot.send_sticker(call.message.chat.id, happy_sticker)
+				bot.send_sticker(call.message.chat.id, happy_sticker)
 				bot.send_message(call.message.chat.id, "Спасибочки! Буду продолжать делать такие фото! Мой инстаграм: cora_corgi_dog")
 			elif call.data == "ok":
 				bot.send_message(call.message.chat.id, "Это хорошо! Может другая тебе больше понравится?")
