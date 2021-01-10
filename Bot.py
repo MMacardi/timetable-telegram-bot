@@ -137,7 +137,7 @@ def buttons(message):
 			answer += f'\nЗвонок в <b>{ring.hour}:{ring_minute}</b> \nСейчас {time.hour + 3}:{time_minute}'
 			bot.send_message(message.chat.id, answer, parse_mode='html')
 		except Exception as e:
-		 	bot.send_message(message.chat.id, f'Уроки закончились!', parse_mode='html')
+		 	bot.send_message(message.chat.id, f'Уроки закончились! \nСейчас {time.hour + 3}:{time_minute}', parse_mode='html')
 
 
 		
