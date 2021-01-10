@@ -5,8 +5,8 @@ import os, random
 import pyowm
 import numpy as np
 from telebot import types
-import pytz 
-import tzlocal
+#import pytz 
+#import tzlocal
 
 bot = telebot.TeleBot(config.TOKEN)
 owm = pyowm.OWM(config.OPEN_WEATHER_MAP_TOKEN, language = "ru")
