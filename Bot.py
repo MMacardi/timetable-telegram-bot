@@ -5,6 +5,8 @@ import os, random
 import pyowm
 import numpy as np
 from telebot import types
+import pytz 
+import tzlocal
 
 bot = telebot.TeleBot(config.TOKEN)
 owm = pyowm.OWM(config.OPEN_WEATHER_MAP_TOKEN, language = "ru")
@@ -61,6 +63,14 @@ def buttons(message):
 
 		
 	elif message.text == "Сколько времени до звонка?":
+		# local_tz = pytz.timezone('Europe/Moscow')
+		# def utc_to_local(utc_dt):
+		# 	local_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
+		# 	return local_tz.normalize(local_dt) # .normalize might be unnecessary
+
+		# def aslocaltimestr(utc_dt):
+		# 	return utc_to_local(utc_dt).strftime('%Y-%m-%d %H:%M:%S.%f %Z%z')
+
 		time = datetime.datetime.now()
 		# in what time rings happen
 		rings = [
@@ -82,7 +92,7 @@ def buttons(message):
 
 		current_hour = time.hour
 		current_minute = time.minute
-		now = datetime.datetime(year=time.year, month=time.month, day = time.day, hour=time.hour,minute=time.minute, second=time.second)
+		now = datetime.datetime(year=time.year, month=time.month, day = time.day, hour=time.hour - 3,minute=time.minute, second=time.second)
 		# nearest ring to current time
 		def nearest(items, pivot):
 			return min(item for item in items if item > pivot)
